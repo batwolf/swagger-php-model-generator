@@ -1,21 +1,23 @@
 {
-	"name": "sturents/swagger-php-model-generator",
+	"name": "oxid-professional-services/swagger-php-model-generator",
     "license": "MIT",
 	"authors": [
 		{
 			"name": "m1ke",
 			"email": "mike@m1ke.me"
+		},
+		{
+			"name": "Keywan Ghadami",
+			"email": "keywan.ghadami@oxid-esales.com"
 		}
 	],
 	"require": {
 		"php": ">=7.1",
-		"nette/php-generator": "^3.0",
-		"symfony/yaml": "^3.4",
-		"symfony/serializer": "^3.4",
-		"psr/http-message": "^1.0"
+		"nette/php-generator": "^3.4",
+		"symfony/yaml": "^4.1",
+		"symfony/serializer": "^5.1"
 	},
 	"require-dev": {
-		"roave/security-advisories": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {

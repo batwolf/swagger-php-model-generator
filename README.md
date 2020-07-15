@@ -2,22 +2,29 @@
 
 Generates simple models with no dependencies from a Swagger/Open API 2.0 file
 
-Install using composer
+#Install
+ 
+clone this repo
+
+Install using composer is not yet ready in future versions it may be like: 
 
 ```sh
-composer require sturents/swagger-php-model-generator
+composer require oxid-professional-services/swagger-php-model-generator
 ```
 
 Run with:
 
 ```php
 
-$generator = new SwaggerGen\GenerateAll('MyNamespace', '/path/to/api.yaml', '/path/to/library/src/');
+$generator = new SwaggerGen\GenerateAll('MyNamespace', '/path/to/api.json', '/path/to/library/src/');
 echo $generator->saved_models.' - '.$generator->saved_requests;
 ```
 
 Or run simply from this repo using:
 
 ```sh
-php example.php --yaml-path /path/to/api.yaml --model-dir /path/to/generate/models --namespace MyNamespace
+ php example.php --swagger-file ../paypal-client/Catalog.json  --namespace "OxidProfessionalServices\PayPal\Api\Catalog" --dir ../paypal-client/src/Catalog 
 ```
+
+
+

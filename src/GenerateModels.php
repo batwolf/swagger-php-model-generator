@@ -52,7 +52,7 @@ class GenerateModels extends ClassGenerator
             }
             $className = $class_details['className'];
             $class = new ClassType($className, $namespace);
-            $class->setExtends("$namespace_name\\" . self::MODEL_CLASS_NAME);
+            $class->setExtends(self::MODEL_CLASS_NAME);
             $class->addComment('** This file was generated automatically, you might want to avoid editing it **');
 
             if (!empty($class_details['description'])) {
@@ -93,7 +93,9 @@ class GenerateModels extends ClassGenerator
         foreach ($properties as $property_name => $property_details) {
             if (isset($property_details['$ref'])) {
                 $type = $this->typeFromRef($property_details);
-                $typehint = "$namespace_name\\$type";
+                if (false === array_search($type, ['string','int'])) {
+                    $typehint = "$namespace_name\\$type";
+                }
             } else {
                 $type = $property_details['type'];
                 if (is_array($type)) {
@@ -110,12 +112,12 @@ class GenerateModels extends ClassGenerator
 
             if ($type === 'array') {
                 $sub_type = $this->typeFromRef($property_details['items']);
-                $comment_type = "{$sub_type}[]";
                 if (isset($property_details['items']['$ref'])) {
-                    $sub_typehint = "$namespace_name\\$sub_type";
+                    $sub_typehint = $sub_type;
                 } else {
                     $sub_typehint = $sub_type;
                 }
+                $comment_type = "{$sub_typehint}[]";
             } else {
                 $comment_type = $type;
                 $sub_type = $sub_typehint = '';
@@ -178,7 +180,6 @@ class GenerateModels extends ClassGenerator
      */
     public function saveClasses(string $dir): void
     {
-        $dir = $this->dirNamespace($dir, self::NAMESPACE_MODEL);
         $this->saveClassesInternal($dir, $this->namespaceModel());
     }
 
@@ -187,7 +188,6 @@ class GenerateModels extends ClassGenerator
      */
     public function dumpParentClass(string $dir): void
     {
-        $dir = $this->dirNamespace($dir, self::NAMESPACE_MODEL);
         $this->dumpParentInternal($dir, __DIR__ . '/SwaggerModel.php', $this->namespaceModel());
     }
 

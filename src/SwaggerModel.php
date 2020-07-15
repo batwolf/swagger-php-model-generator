@@ -9,8 +9,6 @@ class SwaggerModel implements JsonSerializable
 {
     public const DATE_FORMAT = 'Y-m-d H:i:s';
 
-    private $_is_error = false;
-
     /**
      * @return array
      */
@@ -71,18 +69,5 @@ class SwaggerModel implements JsonSerializable
         }
 
         return $data;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isError(): bool
-    {
-        return $this->_is_error;
-    }
-
-    public function asError(): void
-    {
-        $this->_is_error = true;
     }
 }

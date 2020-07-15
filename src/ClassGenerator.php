@@ -23,9 +23,6 @@ abstract class ClassGenerator
     public const REQUEST_CLASS_NAME = 'SwaggerRequest';
     public const MODEL_CLASS_NAME = 'SwaggerModel';
 
-    public const NAMESPACE_MODEL = 'Models';
-    public const NAMESPACE_REQUEST = 'Requests';
-
     /**
      * @var string
      */
@@ -48,12 +45,7 @@ abstract class ClassGenerator
 
     protected function namespaceModel(): string
     {
-        return "{$this->namespace_name}\\" . self::NAMESPACE_MODEL;
-    }
-
-    protected function namespaceRequest(): string
-    {
-        return "{$this->namespace_name}\\" . self::NAMESPACE_REQUEST;
+        return $this->namespace_name;
     }
 
     abstract public function saveClasses(string $dir);

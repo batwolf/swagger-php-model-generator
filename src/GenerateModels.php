@@ -36,7 +36,7 @@ class GenerateModels extends ClassGenerator
 
         $namespace = new PhpNamespace($namespace_name);
 
-        foreach ($api['definitions'] as $classId => &$class_details) {
+        foreach ($api['definitions'] as $classId => $class_details) {
             if ($class_details['type'] === 'object') {
                 $className = preg_replace("/[^a-zA-z0-9]/", "", ucwords($class_details['title']));
                 $class_details['className'] = $className;
@@ -50,7 +50,7 @@ class GenerateModels extends ClassGenerator
             if ($class_details['type'] !== 'object') {
                 continue;
             }
-            $className = $class_details['className'];
+            $className = $this->typeMap[$classId];
             $class = new ClassType($className, $namespace);
             $class->setExtends(self::MODEL_CLASS_NAME);
             $class->addComment('** This file was generated automatically, you might want to avoid editing it **');
